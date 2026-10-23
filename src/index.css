@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bodoni Moda", ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --color-void: #05060a;
+  --color-panel: #0b0e15;
+  --color-starlight: #8fb8ff;
+  --color-starlight-hi: #dce8ff;
+  --color-starlight-lo: #3a5d9e;
+  --color-slate: #8a93a6;
+  --color-ember: #ff6a2b;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #05060a;
+  color: #8a93a6;
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+}
+
+.tabnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* short viewports: shed the hint and give the type back its air */
+@media (max-height: 640px) {
+  .era-hint {
+    display: none;
+  }
+}
+@media (max-height: 560px) {
+  .era-rule {
+    display: none;
+  }
+}
+
+@keyframes eraIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.era-in > * {
+  animation: eraIn 0.8s cubic-bezier(0.16, 0.84, 0.32, 1) both;
+}
+.era-in > *:nth-child(1) {
+  animation-delay: 0.02s;
+}
+.era-in > *:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.era-in > *:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.era-in > *:nth-child(4) {
+  animation-delay: 0.26s;
+}
+
+@keyframes softPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.load-pulse {
+  animation: softPulse 2.4s ease-in-out infinite;
+}
+
+*:focus-visible {
+  outline: 1px solid #ff6a2b;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .era-in,
+  .era-in > *,
+  .load-pulse {
+    animation-duration: 0.18s !important;
+    animation-delay: 0s !important;
+  }
+}
